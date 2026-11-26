@@ -284,7 +284,15 @@ def mostrar_mensaje(mensaje, indice):
             st.caption("Respuesta local de demostración.")
 
 
-st.set_page_config(page_title="Asistente bilingüe", page_icon="🦙")
+st.set_page_config(
+    page_title="Yachay NPL | Asistente bilingüe",
+    page_icon="assets/yachay-npl-mark.png",
+)
+st.logo(
+    "assets/yachay-npl-logo.png",
+    size="large",
+    icon_image="assets/yachay-npl-mark.png",
+)
 st.title("Yachay NPL")
 st.caption("Asistente conversacional bilingüe")
 st.write(

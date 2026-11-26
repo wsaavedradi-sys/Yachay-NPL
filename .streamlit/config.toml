@@ -1,0 +1,14 @@
+[theme]
+base = "light"
+primaryColor = "#087F8C"
+backgroundColor = "#F8FBFF"
+secondaryBackgroundColor = "#EAF7FC"
+textColor = "#101B4F"
+linkColor = "#007C91"
+borderColor = "#BCDDEB"
+violetColor = "#762CAF"
+greenColor = "#0F9688"
+chartCategoricalColors = ["#087F8C", "#762CAF", "#147BA5", "#D84EB7", "#F2C14E"]
+baseRadius = "large"
+buttonRadius = "large"
+font = "sans-serif"
