@@ -293,11 +293,21 @@ st.logo(
     size="large",
     icon_image="assets/yachay-npl-mark.png",
 )
-st.title("Yachay NPL")
-st.caption("Asistente conversacional bilingüe")
-st.write(
-    "Escribe en español y recibe una respuesta en el idioma elegido."
-)
+with st.container(horizontal_alignment="center", gap="small"):
+    st.image(
+        "assets/yachay-npl-logo.png",
+        caption="Logotipo de Yachay NPL",
+        width=380,
+    )
+    st.badge(
+        "Asistente bilingüe",
+        icon=":material/translate:",
+        color="violet",
+    )
+    st.markdown(
+        ":blue[Escribe en español] y recibe una respuesta en el idioma elegido.",
+        text_alignment="center",
+    )
 
 idioma_nombre = st.selectbox("Idioma de respuesta", list(IDIOMAS_DESTINO))
 idioma_destino = IDIOMAS_DESTINO[idioma_nombre]
@@ -305,7 +315,7 @@ idioma_destino = IDIOMAS_DESTINO[idioma_nombre]
 if "mensajes" not in st.session_state:
     st.session_state.mensajes = []
 
-if st.button("Nueva conversación", icon=":material/add:"):
+if st.button("Nueva conversación", icon=":material/add:", type="primary"):
     st.session_state.mensajes = []
     st.rerun()
 
