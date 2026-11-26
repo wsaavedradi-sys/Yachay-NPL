@@ -288,34 +288,108 @@ st.set_page_config(
     page_title="Yachay NPL | Asistente bilingüe",
     page_icon="assets/yachay-npl-mark.png",
 )
-st.logo(
-    "assets/yachay-npl-logo.png",
-    size="large",
-    icon_image="assets/yachay-npl-mark.png",
-)
+st.html("""
+<style>
+[data-testid="stAppViewContainer"] {
+    background:
+        radial-gradient(ellipse at 10% 0%, rgba(28, 198, 211, 0.18), transparent 38%),
+        radial-gradient(ellipse at 94% 12%, rgba(151, 92, 238, 0.2), transparent 36%),
+        #09143B;
+    background-attachment: fixed;
+}
+
+.st-key-yachay_top_nav {
+    position: sticky;
+    top: 3.75rem;
+    z-index: 999;
+    padding: 0.2rem 0.9rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(53, 221, 230, 0.25);
+    border-radius: 18px;
+    background: rgba(18, 31, 92, 0.78);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(16px);
+}
+
+.st-key-yachay_top_nav img {
+    max-height: 54px;
+    object-fit: contain;
+}
+
+.st-key-yachay_top_nav button,
+.st-key-yachay_new_chat button {
+    border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(8, 127, 140, 0.22);
+}
+
+.st-key-yachay_language_select [data-baseweb="select"] > div {
+    border-color: rgba(53, 221, 230, 0.38);
+    border-radius: 14px;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.14);
+}
+
+.st-key-yachay_chat_input textarea {
+    min-height: 84px;
+    border-color: rgba(53, 221, 230, 0.34);
+    border-radius: 18px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+}
+
+.st-key-yachay_chat_input button {
+    border-radius: 14px;
+}
+</style>
+""")
+
+with st.container(key="yachay_top_nav"):
+    logo_column, profile_column = st.columns([3, 2], vertical_alignment="center")
+    with logo_column:
+        st.image("assets/yachay-npl-logo.png", width=250)
+    with profile_column:
+        with st.container(
+            horizontal=True,
+            horizontal_alignment="right",
+            vertical_alignment="center",
+            gap="small",
+        ):
+            st.badge("Invitado", icon=":material/person:", color="blue")
+            with st.popover(
+                "Asistente bilingüe",
+                type="primary",
+                icon=":material/smart_toy:",
+            ):
+                st.markdown("**Invitado**")
+                st.caption("Esta app no administra cuentas de usuario.")
+                st.badge(
+                    "Asistente bilingüe",
+                    icon=":material/translate:",
+                    color="violet",
+                )
+
 with st.container(horizontal_alignment="center", gap="small"):
-    st.image(
-        "assets/yachay-npl-logo.png",
-        caption="Logotipo de Yachay NPL",
-        width=380,
-    )
-    st.badge(
-        "Asistente bilingüe",
-        icon=":material/translate:",
-        color="violet",
-    )
+    st.title("Yachay NPL", text_alignment="center")
+    st.caption("Asistente conversacional bilingüe")
     st.markdown(
         ":blue[Escribe en español] y recibe una respuesta en el idioma elegido.",
         text_alignment="center",
     )
 
-idioma_nombre = st.selectbox("Idioma de respuesta", list(IDIOMAS_DESTINO))
+idioma_nombre = st.selectbox(
+    "Idioma de respuesta",
+    list(IDIOMAS_DESTINO),
+    key="yachay_language_select",
+)
 idioma_destino = IDIOMAS_DESTINO[idioma_nombre]
 
 if "mensajes" not in st.session_state:
     st.session_state.mensajes = []
 
-if st.button("Nueva conversación", icon=":material/add:", type="primary"):
+if st.button(
+    "Nueva conversación",
+    icon=":material/add:",
+    type="primary",
+    key="yachay_new_chat",
+):
     st.session_state.mensajes = []
     st.rerun()
 
@@ -330,7 +404,10 @@ def mostrar_conversacion():
 mostrar_conversacion()
 
 texto_usuario = st.chat_input(
-    "Escribe tu mensaje en español...", submit_mode="disable"
+    "Escribe tu mensaje en español...",
+    submit_mode="disable",
+    height=84,
+    key="yachay_chat_input",
 )
 
 if texto_usuario:
