@@ -15,8 +15,8 @@ from streamlit.errors import StreamlitSecretNotFoundError
 
 
 IDIOMAS_DESTINO = {
-    "Español": "es",
     "Quechua": "qu",
+    "Español": "es",
     "Inglés": "en",
     "Francés": "fr",
     "Portugués": "pt",
